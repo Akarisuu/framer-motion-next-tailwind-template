@@ -17,7 +17,7 @@ export default function Home() {
 
       <div className="mb-32 grid text-center lg:mb-0 lg:grid-cols-4 lg:text-left">
         <motion.a
-          href="./pull-to-fetch"
+          href="./pull-to-refetch"
           whileHover={{
             scale: 1.2,
             transition: { duration: 0.35 },
@@ -26,13 +26,13 @@ export default function Home() {
           className="group rounded-lg border border-transparent px-5 py-4"
         >
           <h2 className={'mb-3 text-2xl font-semibold'}>
-            Pull to fetch example{' '}
+            Pull to refetch example{' '}
             <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
               -&gt;
             </span>
           </h2>
           <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Example of pull to fetch. Using gesture handlers and useSpring/useTransition hooks
+            Example of pull to refetch. Using gesture handlers and useSpring/useTransition hooks
           </p>
         </motion.a>
       </div>

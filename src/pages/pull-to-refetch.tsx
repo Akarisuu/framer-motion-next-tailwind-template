@@ -1,7 +1,7 @@
 import { DraggableProps, motion, useTransform, useAnimation, useSpring, AnimationProps } from 'framer-motion';
 import { useState } from 'react';
 
-export default function PullToFetchPage() {
+export default function PullToRefetchPage() {
   const scrollY = useSpring(0, { stiffness: 500, damping: 50 }); // spring with stiffness and damping and our base value on which we will apply transforms
 
   const opacity = useTransform(scrollY, [0, 30], [0, 1]); // opacity will be 0 when scrollY is 0 and 1 when scrollY is 30
@@ -60,7 +60,7 @@ export default function PullToFetchPage() {
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-cebter p-24 bg-gray-800">
-      <h1 className="text-4xl font-bold mb-8">Pull to fetch</h1>
+      <h1 className="text-4xl font-bold mb-8">Pull to refetch</h1>
       <motion.div className="w-96 h-[700px] border-[12px] border-black text-black rounded-[32px] bg-gray-200 p-2 overflow-hidden relative">
         <motion.span
           className="w-8 h-8 rounded-full bg-gray-400 text-white flex items-center justify-center absolute top-4 mx-auto left-0 right-0"
@@ -96,7 +96,7 @@ export default function PullToFetchPage() {
           dragElastic={dragElastic}
           onDragEnd={onDragEnd}
         >
-          <motion.h2>Pull to fetch another meme</motion.h2>
+          <motion.h2>Pull to refetch another meme</motion.h2>
           <motion.img
             className="max-w-full max-h-[75%] object-contain"
             src={memes[randomMemeIndex]}
