@@ -1,4 +1,4 @@
-import { DraggableProps, motion, useTransform, useAnimation, useSpring, AnimationProps } from 'framer-motion';
+import { DraggableProps, motion, useTransform, useAnimation, useSpring, Variants, DragElastic } from 'framer-motion';
 import { useState } from 'react';
 
 export default function PullToRefetchPage() {
@@ -13,14 +13,14 @@ export default function PullToRefetchPage() {
     bottom: 0,
   };
 
-  const dragElastic: DraggableProps['dragElastic'] = {
+  const dragElastic: DragElastic = {
     // dragElastic for elastic effect when we drag the element. It's set by default to every direction, but we don't want it to be elastic to the top
     bottom: 0.15,
   };
 
   const loadingAnimation = useAnimation(); // animation handler for the loader spinner
 
-  const animationVariants: AnimationProps['variants'] = {
+  const animationVariants: Variants = {
     // set of animation variants for the loader spinner
     startLoading: {
       rotate: 360,
@@ -45,7 +45,7 @@ export default function PullToRefetchPage() {
   const onDragEnd = () => {
     const y = scrollY.get();
 
-    if (y > 30) {
+    if (y >= 30) {
       scrollY.set(30);
       scrollY.stop();
       loadingAnimation.start('startLoading');
