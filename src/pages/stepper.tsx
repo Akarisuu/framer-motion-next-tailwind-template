@@ -87,9 +87,11 @@ function Stepper({ step, currentStep }: { step: number; currentStep: number }) {
 export default function StepperPage() {
   const [step, setStep] = useState(0);
 
+  const numberOfSteps = 4;
+
   const onChangeStep = (direction: -1 | 1) => {
     if (direction === -1 && step === 0) return;
-    if (direction === 1 && step === 4) return;
+    if (direction === 1 && step === numberOfSteps) return;
 
     setStep(step + direction);
   };
@@ -99,7 +101,7 @@ export default function StepperPage() {
       <h1>Stepper</h1>
       <div className="flex flex-col gap-8 p-8 rounded bg-gray-100 text-black w-96">
         <div className="flex gap-4 mx-auto">
-          {[...Array(4)].map((_, i) => (
+          {[...Array(numberOfSteps)].map((_, i) => (
             <Stepper key={i} step={i} currentStep={step} />
           ))}
         </div>
