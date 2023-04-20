@@ -58,14 +58,7 @@ function Stepper({ step, currentStep }: { step: number; currentStep: number }) {
       <span>{step + 1}</span>
       <AnimatePresence>
         {step < currentStep && (
-          <motion.div
-            className="absolute w-full h-full top-0 left-0 flex items-center justify-center text-gray-100"
-            variants={checkmarkVariants}
-            animate={'bgShow'}
-            transition={{
-              duration: 0.2,
-            }}
-          >
+          <div className="absolute w-full h-full top-0 left-0 flex items-center justify-center text-gray-100">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -84,7 +77,7 @@ function Stepper({ step, currentStep }: { step: number; currentStep: number }) {
                 transition={checkmarkTransition}
               />
             </svg>
-          </motion.div>
+          </div>
         )}
       </AnimatePresence>
     </motion.div>
