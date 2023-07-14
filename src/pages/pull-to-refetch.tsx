@@ -1,46 +1,47 @@
 import { DraggableProps, motion, useTransform, useAnimation, useSpring, Variants, DragElastic } from 'framer-motion';
 import { useState } from 'react';
 
+const dragConstraints: DraggableProps['dragConstraints'] = {
+  // dragConstraints for respecting the boundaries of the parent
+  top: 0,
+  bottom: 0,
+};
+
+const dragElastic: DragElastic = {
+  // dragElastic for elastic effect when we drag the element. It's set by default to every direction, but we don't want it to be elastic to the top
+  bottom: 0.15,
+};
+
+const animationVariants: Variants = {
+  // set of animation variants for the loader spinner
+  startLoading: {
+    rotate: 360,
+    transition: {
+      repeat: Infinity,
+      ease: 'linear',
+      duration: 1,
+    },
+  },
+  endLoading: {
+    rotate: 0,
+  },
+};
+
+const memes = [
+  'https://i.redd.it/254twe19ewra1.jpg',
+  'https://i.redd.it/yujh8gzbcypa1.png',
+  'https://i.redd.it/i1zsudixvipa1.jpg',
+];
+
 export default function PullToRefetchPage() {
   const scrollY = useSpring(0, { stiffness: 500, damping: 50 }); // spring with stiffness and damping and our base value on which we will apply transforms
 
   const opacity = useTransform(scrollY, [0, 30], [0, 1]); // opacity will be 0 when scrollY is 0 and 1 when scrollY is 30
   const loaderY = useTransform(scrollY, [0, 30], [-48, 0]); // loaderY will be 0 when scrollY is 0 and -48 when scrollY is 30
 
-  const dragConstraints: DraggableProps['dragConstraints'] = {
-    // dragConstraints for respecting the boundaries of the parent
-    top: 0,
-    bottom: 0,
-  };
-
-  const dragElastic: DragElastic = {
-    // dragElastic for elastic effect when we drag the element. It's set by default to every direction, but we don't want it to be elastic to the top
-    bottom: 0.15,
-  };
-
   const loadingAnimation = useAnimation(); // animation handler for the loader spinner
 
-  const animationVariants: Variants = {
-    // set of animation variants for the loader spinner
-    startLoading: {
-      rotate: 360,
-      transition: {
-        repeat: Infinity,
-        ease: 'linear',
-        duration: 1,
-      },
-    },
-    endLoading: {
-      rotate: 0,
-    },
-  };
-
   const [randomMemeIndex, setRandomMemeIndex] = useState(0);
-  const memes = [
-    'https://i.redd.it/254twe19ewra1.jpg',
-    'https://i.redd.it/yujh8gzbcypa1.png',
-    'https://i.redd.it/i1zsudixvipa1.jpg',
-  ];
 
   const onDragEnd = () => {
     const y = scrollY.get();
@@ -59,7 +60,7 @@ export default function PullToRefetchPage() {
   };
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-cebter p-24 bg-gray-800">
+    <main className="flex min-h-screen flex-col items-center justify-center p-24 bg-gray-800">
       <h1 className="text-4xl font-bold mb-8">Pull to refetch</h1>
       <motion.div className="w-96 h-[700px] border-[12px] border-black text-black rounded-[32px] bg-gray-200 p-2 overflow-hidden relative">
         <motion.span
