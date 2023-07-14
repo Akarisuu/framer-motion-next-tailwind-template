@@ -1,6 +1,40 @@
 import { AnimatePresence, Transition, Variants, motion } from 'framer-motion';
 import { useState } from 'react';
 
+const checkmarkVariants: Variants = {
+  hide: {
+    pathLength: 0,
+  },
+  show: {
+    pathLength: 1,
+  },
+};
+
+const stepperVariants: Variants = {
+  inactive: {
+    backgroundColor: '#f1f1f1',
+    borderColor: '#e0e0e0',
+    color: '#e0e0e0',
+  },
+  current: {
+    backgroundColor: '#f1f1f1',
+    borderColor: '#2563eb',
+    color: '#2563eb',
+  },
+  checked: {
+    backgroundColor: '#2563eb',
+    borderColor: '#2563eb',
+    color: 'transparent',
+  },
+};
+
+const checkmarkTransition: Transition = {
+  duration: 0.3,
+  delay: 0.15,
+  ease: 'easeOut',
+  type: 'tween',
+};
+
 const getStatus = (step: number, currentStep: number) => {
   switch (true) {
     case step < currentStep:
@@ -14,40 +48,6 @@ const getStatus = (step: number, currentStep: number) => {
 
 function Stepper({ step, currentStep }: { step: number; currentStep: number }) {
   const status = getStatus(step, currentStep);
-
-  const checkmarkVariants: Variants = {
-    hide: {
-      pathLength: 0,
-    },
-    show: {
-      pathLength: 1,
-    },
-  };
-
-  const stepperVariants: Variants = {
-    inactive: {
-      backgroundColor: '#f1f1f1',
-      borderColor: '#e0e0e0',
-      color: '#e0e0e0',
-    },
-    current: {
-      backgroundColor: '#f1f1f1',
-      borderColor: '#2563eb',
-      color: '#2563eb',
-    },
-    checked: {
-      backgroundColor: '#2563eb',
-      borderColor: '#2563eb',
-      color: 'transparent',
-    },
-  };
-
-  const checkmarkTransition: Transition = {
-    duration: 0.3,
-    delay: 0.15,
-    ease: 'easeOut',
-    type: 'tween',
-  };
 
   return (
     <motion.div
